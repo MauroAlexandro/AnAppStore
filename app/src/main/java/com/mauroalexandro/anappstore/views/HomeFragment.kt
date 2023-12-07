@@ -2,6 +2,7 @@ package com.mauroalexandro.anappstore.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mauroalexandro.anappstore.databinding.FragmentHomeBinding
 import com.mauroalexandro.anappstore.models.App
 import com.mauroalexandro.anappstore.network.Status
+import com.mauroalexandro.anappstore.utils.Utils
 import com.mauroalexandro.anappstore.viewmodels.HomeViewModel
 
 class HomeFragment : Fragment() {
@@ -22,6 +24,7 @@ class HomeFragment : Fragment() {
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var homeAdapter: HomeAdapter
     private var appList: List<App> = ArrayList()
+    private var utils: Utils = Utils.getInstance()
 
     //List Control Element Positions
     private var firstElement = 0
@@ -48,6 +51,25 @@ class HomeFragment : Fragment() {
                     lastElement += 6
                     updateAdapter()
                 }
+            }
+        })
+
+        binding.appsRecyclerview.addOnItemTouchListener(object : RecyclerView.SimpleOnItemTouchListener() {
+            var downTouch = false
+            override fun onInterceptTouchEvent(recyclerView: RecyclerView, e: MotionEvent): Boolean {
+                when (e.action) {
+                    MotionEvent.ACTION_DOWN -> downTouch = true
+                    MotionEvent.ACTION_UP -> if (downTouch) {
+                        downTouch = false
+                        binding.appsRecyclerview.findChildViewUnder(e.x, e.y)?.let {
+                            val position = recyclerView.getChildAdapterPosition(it)
+                            val appClicked = (recyclerView.adapter as HomeAdapter).getItemAtPosition(position)
+                            activity?.let { fragmentActivity -> utils.openDetailsFragment(fragmentActivity, appClicked, utils) }
+                        }
+                    }
+                    else -> downTouch = false
+                }
+                return super.onInterceptTouchEvent(recyclerView, e)
             }
         })
 

@@ -7,4 +7,10 @@
 
     <!-- App Screen -->
     <string name="app_cell_image_content_description">App Icon</string>
+
+    <!-- Detail Screen -->
+    <string name="app_detail_download_button_text">Download</string>
+    <string name="app_detail_download_dialog_title_text">Warning</string>
+    <string name="app_detail_download_dialog_message_text">Download is not available in demo mode.</string>
+    <string name="app_detail_download_dialog_positive_button_text">OK</string>
 </resources>
