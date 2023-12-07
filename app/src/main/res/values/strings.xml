@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">AnAppStore</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+
+    <!-- Home Screen -->
+    <string name="home_screen_no_data">No Data</string>
+
+    <!-- App Screen -->
+    <string name="app_cell_image_content_description">App Icon</string>
 </resources>
