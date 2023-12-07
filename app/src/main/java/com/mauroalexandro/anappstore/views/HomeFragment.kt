@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mauroalexandro.anappstore.databinding.FragmentHomeBinding
 import com.mauroalexandro.anappstore.models.App
 import com.mauroalexandro.anappstore.network.Status
@@ -24,7 +25,7 @@ class HomeFragment : Fragment() {
 
     //List Control Element Positions
     private var firstElement = 0
-    private var lastElement = 10
+    private var lastElement = 6
     private var listSize = 0
 
     override fun onCreateView(
@@ -38,6 +39,17 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
         setAppList()
+
+        binding.appsRecyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (!recyclerView.canScrollVertically(1) && dy > 0) {
+                    //Reached the BOTTOM of the List
+                    firstElement += 6
+                    lastElement += 6
+                    updateAdapter()
+                }
+            }
+        })
 
         return root
     }
@@ -54,7 +66,6 @@ class HomeFragment : Fragment() {
                         it.data?.let { response ->
                             this.appList = response.responses.listApps.datasets.all.data.list
                             listSize = this.appList.size
-                            lastElement = listSize - 1
 
                             updateAdapter()
 
@@ -86,7 +97,7 @@ class HomeFragment : Fragment() {
                 lastElement = listSize - 1
             }
 
-            if(listSize <= homeAdapter.itemCount + 10)
+            if(listSize <= homeAdapter.itemCount + 6)
                 lastElement = listSize-1
 
             val sublist = ArrayList(appList.subList(firstElement, lastElement))
