@@ -1,15 +1,23 @@
 package com.mauroalexandro.anappstore.utils
 
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
 import android.content.Context
-import android.content.SharedPreferences
+import android.graphics.Color
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.NotificationCompat
 import androidx.fragment.app.FragmentActivity
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import androidx.work.Constraints
+import androidx.work.Data
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.mauroalexandro.anappstore.R
 import com.mauroalexandro.anappstore.models.App
 import com.mauroalexandro.anappstore.views.DetailsFragment
-import java.lang.reflect.Type
+import java.util.concurrent.TimeUnit
 
 class Utils {
     companion object {
@@ -21,6 +29,8 @@ class Utils {
             return INSTANCE as Utils
         }
     }
+
+    val WM_KEY = "WORK_MANAGER_KEY"
 
     /**
      * Show DetailsFragment
@@ -48,5 +58,62 @@ class Utils {
 
         val dialog: AlertDialog = builder.create()
         dialog.show()
+    }
+
+    /**
+     * Work Manager to show every 30minutes a Notification
+     */
+    fun createWorkManager(context: Context) {
+        val workManager = WorkManager.getInstance(context)
+
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .setRequiresBatteryNotLow(false)
+            .build()
+
+        val data = Data.Builder()
+
+        data.putString(WM_KEY, context.getString(R.string.app_workmanager_message))
+
+        val work = PeriodicWorkRequestBuilder<FetchDataWorker>(30, TimeUnit.MINUTES)
+            .setConstraints(constraints)
+            .setInputData(data.build())
+            .setInitialDelay(30,TimeUnit.MINUTES)
+            .build()
+
+        workManager.enqueueUniquePeriodicWork("Some-Unique-Name",
+            ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE,
+            work)
+    }
+
+    /**
+     * Creation of a Simple Notification
+     */
+    fun createSimpleNotificationTest(context: Context, endPoint: String?) {
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val NOTIFICATION_CHANNEL_ID = "my_channel_id_01"
+        val notificationChannel = NotificationChannel(
+            NOTIFICATION_CHANNEL_ID,
+            "My Notifications",
+            NotificationManager.IMPORTANCE_HIGH
+        )
+
+        // Configure the notification channel.
+        notificationChannel.description = "Channel description"
+        notificationChannel.enableLights(true)
+        notificationChannel.lightColor = Color.RED
+        notificationChannel.vibrationPattern = longArrayOf(0, 1000, 500, 1000)
+        notificationChannel.enableVibration(true)
+        notificationManager.createNotificationChannel(notificationChannel)
+        val notificationBuilder = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
+        notificationBuilder.setAutoCancel(true)
+            .setDefaults(NotificationCompat.DEFAULT_ALL)
+            .setWhen(System.currentTimeMillis())
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setPriority(Notification.DEFAULT_ALL)
+            .setContentTitle(context.getString(R.string.app_name))
+            .setContentText(endPoint)
+        notificationManager.notify( 99999, notificationBuilder.build())
     }
 }

@@ -13,4 +13,7 @@
     <string name="app_detail_download_dialog_title_text">Warning</string>
     <string name="app_detail_download_dialog_message_text">Download is not available in demo mode.</string>
     <string name="app_detail_download_dialog_positive_button_text">OK</string>
+
+    <!-- Work Manager -->
+    <string name="app_workmanager_message">News Apps are Available!</string>
 </resources>

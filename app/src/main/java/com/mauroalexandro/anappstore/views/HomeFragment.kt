@@ -73,6 +73,9 @@ class HomeFragment : Fragment() {
             }
         })
 
+        //Call WorkManager to show a Notification every 30 Minutes
+        utils.createWorkManager(requireContext())
+
         return root
     }
 
