@@ -89,14 +89,19 @@ class HomeFragment : Fragment() {
                         binding.applistNoData.visibility = View.GONE
 
                         it.data?.let { response ->
-                            this.appList = response.responses.listApps.datasets.all.data.list
-                            listSize = this.appList.size
+                            if(response.responses != null){
+                                this.appList = response.responses.listApps.datasets.all.data.list
+                                listSize = this.appList.size
 
-                            updateAdapter()
+                                updateAdapter()
 
-                            binding.appsRecyclerview.visibility = View.VISIBLE
-                            binding.appsRecyclerview.adapter = homeAdapter
-                            binding.appsRecyclerview.layoutManager = GridLayoutManager(context, 2)
+                                binding.appsRecyclerview.visibility = View.VISIBLE
+                                binding.appsRecyclerview.adapter = homeAdapter
+                                binding.appsRecyclerview.layoutManager = GridLayoutManager(context, 2)
+                            } else {
+                                binding.appsProgressBar.visibility = View.GONE
+                                binding.applistNoData.visibility = View.VISIBLE
+                            }
                         }
                     }
 
