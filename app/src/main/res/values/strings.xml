@@ -1,6 +1,19 @@
 <resources>
     <string name="app_name">AnAppStore</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+
+    <!-- Home Screen -->
+    <string name="home_screen_no_data">No Data</string>
+
+    <!-- App Screen -->
+    <string name="app_cell_image_content_description">App Icon</string>
+
+    <!-- Detail Screen -->
+    <string name="app_detail_download_button_text">Download</string>
+    <string name="app_detail_download_dialog_title_text">Warning</string>
+    <string name="app_detail_download_dialog_message_text">Download is not available in demo mode.</string>
+    <string name="app_detail_download_dialog_positive_button_text">OK</string>
+
+    <!-- Work Manager -->
+    <string name="app_workmanager_message">News Apps are Available!</string>
 </resources>

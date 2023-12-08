@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/app_detail_margin"
+    android:layout_marginTop="@dimen/app_detail_margin"
+    android:layout_marginEnd="@dimen/app_detail_margin">
+
+    <TextView
+        android:id="@+id/app_detail_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="textStart"
+        android:textSize="@dimen/app_detail_name_text_size"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/app_detail_vername"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/app_detail_vername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/app_detail_name_margin"
+        android:textAlignment="textStart"
+        android:textSize="@dimen/app_detail_vername_text_size"
+        app:layout_constraintTop_toBottomOf="@+id/app_detail_name"
+        app:layout_constraintBottom_toTopOf="@+id/app_detail_vercode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/app_detail_vercode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/app_detail_vercode_margin"
+        android:textAlignment="textStart"
+        android:textSize="@dimen/app_detail_vercode_text_size"
+        app:layout_constraintTop_toBottomOf="@+id/app_detail_name"
+        app:layout_constraintBottom_toTopOf="@+id/app_detail_download_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/app_detail_download_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_weight="1"
+        android:layout_marginStart="@dimen/app_detail_button_margin"
+        android:text="@string/app_detail_download_button_text"
+        android:textAlignment="center"
+        android:textSize="@dimen/app_detail_button_text_size"
+        android:backgroundTint="@color/teal_700"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/app_detail_vercode"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

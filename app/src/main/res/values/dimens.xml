@@ -1,5 +1,23 @@
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>>
+
+    <!-- App Cell -->
+    <dimen name="app_cell_elevation">10dp</dimen>
+    <dimen name="app_cell_margin">10dp</dimen>
+    <dimen name="app_cell_image_margin">10dp</dimen>
+    <dimen name="app_cell_name_margin">10dp</dimen>
+    <dimen name="app_cell_name_text_size">16sp</dimen>
+
+    <!-- Detail Screen -->
+    <dimen name="app_detail_margin">10dp</dimen>
+    <dimen name="app_detail_name_margin">10dp</dimen>
+    <dimen name="app_detail_name_text_size">16sp</dimen>
+    <dimen name="app_detail_vername_margin">10dp</dimen>
+    <dimen name="app_detail_vername_text_size">14sp</dimen>
+    <dimen name="app_detail_vercode_margin">10dp</dimen>
+    <dimen name="app_detail_vercode_text_size">14sp</dimen>
+    <dimen name="app_detail_button_margin">10dp</dimen>
+    <dimen name="app_detail_button_text_size">16sp</dimen>
 </resources>
