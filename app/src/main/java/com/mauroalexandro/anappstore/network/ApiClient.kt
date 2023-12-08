@@ -5,10 +5,10 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-private const val BASEURL = "http://ws2.aptoide.com/api/6/bulkRequest/api_list/"
 
 class ApiClient {
     private lateinit var retrofit: Retrofit
+    var BASEURL = "http://ws2.aptoide.com/api/6/bulkRequest/api_list/"
 
     companion object {
         private var INSTANCE: ApiClient? = null

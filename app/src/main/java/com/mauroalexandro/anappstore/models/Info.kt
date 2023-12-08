@@ -1,6 +1,6 @@
 package com.mauroalexandro.anappstore.models
 
-data class InfoX(
+data class Info(
     val status: String,
     val time: Time
 )
