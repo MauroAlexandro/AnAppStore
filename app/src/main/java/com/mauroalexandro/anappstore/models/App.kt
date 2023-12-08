@@ -13,7 +13,7 @@ data class App(
     val `package`: String,
     val pdownloads: Int,
     val rating: Double,
-    val size: Int,
+    val size: Long,
     val store_id: Int,
     val store_name: String,
     val updated: String,
